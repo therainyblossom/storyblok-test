@@ -19,7 +19,7 @@ type DefaultHeroBlok = {
   headline: string
   description: string
   buttons: string[]
-  featuredIn: string
+  featuredInText: string
   featuredPlatforms: string[]
   badgeText: string
   badgeLink: string
@@ -42,7 +42,7 @@ defineProps({
   >
     <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 ">
       <a
-        href="#"
+        :href="blok.badgeLink || '#'"
         class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
         role="alert"
       >
@@ -76,7 +76,7 @@ defineProps({
         <StoryblokComponent v-for="button in blok.buttons" :key="button._uid" :blok="button" />
       </div>
       <div class="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
-        <span class="font-semibold text-gray-400 uppercase">{{ blok.featuredIn }}</span>
+        <span class="font-semibold text-gray-400 uppercase">{{ blok.featuredInText }}</span>
         <div
           class="flex flex-wrap justify-center items-center mt-8 text-gray-500 sm:justify-between"
         >
