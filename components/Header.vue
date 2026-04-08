@@ -36,12 +36,13 @@ onMounted(() => {
     class="bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-900"
   >
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-      <NuxtLink :to="'/home'" class="flex items-center z-[60]">
+      <NuxtLink :to="'/home'" class="flex items-center z-[60]" aria-label="Home">
         <NuxtImg
+          v-if="config?.header_logo?.filename"
           width="60"
           height="60"
-          :src="config?.header_logo?.filename"
-          :alt="config?.header_logo?.alt"
+          :src="config.header_logo.filename"
+          :alt="config.header_logo.alt || 'Logo'"
         />
       </NuxtLink>
       <div class="md:hidden z-[60] flex items-center gap-4">
@@ -85,20 +86,21 @@ onMounted(() => {
               </NuxtLink>
             </li>
           </template>
-          <LanguageSwitcher />
-          <theme-switcher v-if="config.theme_switcher" />
+          <li class="flex items-center"><LanguageSwitcher /></li>
+          <li v-if="config.theme_switcher" class="flex items-center"><theme-switcher /></li>
         </ul>
       </div>
     </div>
   </nav>
   <div v-if="isMobileMenuOpen" class="md:hidden fixed inset-0 bg-white z-50">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-      <NuxtLink :to="'/'" class="flex items-center z-[60]">
+      <NuxtLink :to="'/'" class="flex items-center z-[60]" aria-label="Home">
         <NuxtImg
+          v-if="config?.header_logo?.filename"
           width="60"
           height="60"
-          :src="config?.header_logo?.filename"
-          :alt="config?.header_logo?.alt"
+          :src="config.header_logo.filename"
+          :alt="config.header_logo.alt || 'Logo'"
         />
       </NuxtLink>
       <svg

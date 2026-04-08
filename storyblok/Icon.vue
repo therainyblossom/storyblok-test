@@ -11,12 +11,12 @@ defineProps({
 <template>
   <span v-editable="blok">
     <NuxtImg
-      v-if="blok.icon_file.filename"
+      v-if="blok.icon_file?.filename"
       provider="storyblok"
       :width="blok.icon_width ?? 20"
       :height="blok.icon_height ?? 20"
       :src="blok.icon_file.filename"
-      :alt="blok.icon_file.alt"
+      :alt="blok.icon_file.alt || ''"
       class="mx-2"
     />
     <div

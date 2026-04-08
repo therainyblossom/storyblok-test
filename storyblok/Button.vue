@@ -10,8 +10,8 @@ defineProps({
 <template>
   <NuxtLink
     v-editable="blok"
-    :to="useFormatUrl(blok.link.story?.full_slug || blok.link.cached_url)"
-    :target="blok.link.target"
+    :to="useFormatUrl(blok.link?.story?.full_slug || blok.link?.cached_url)"
+    :target="blok.link?.target"
     :class="[
       'inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center dark:text-white',
       {
@@ -43,12 +43,12 @@ defineProps({
     >
       <template v-for="inBlok in blok.icon" :key="inBlok._uid">
         <NuxtImg
-          v-if="inBlok.icon_file.filename"
+          v-if="inBlok.icon_file?.filename"
           provider="storyblok"
           :width="inBlok.icon_width ?? 20"
           :height="inBlok.icon_height ?? 20"
           :src="inBlok.icon_file.filename"
-          :alt="inBlok.icon_file.alt"
+          :alt="inBlok.icon_file.alt || ''"
           class="mx-2"
         />
         <div
