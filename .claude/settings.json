@@ -1,0 +1,32 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_FILE_PATH\"; if [[ \"$FILE\" == *.spec.ts ]]; then echo \"[hook] Test file modified: $FILE — remember to run it\"; fi'",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_FILE_PATH\"; if [[ \"$FILE\" == *.spec.ts ]] || [[ \"$FILE\" == *.ts ]]; then grep -nE \"(password|secret|api_key|token)\\s*[:=]\\s*[\"'\\x27\"](?!\\{\\{|process\\.env)\" \"$FILE\" 2>/dev/null && echo \"::warning::Possible hardcoded secret in $FILE\" || true; fi'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'MODIFIED=$(git diff --name-only 2>/dev/null | grep \".spec.ts$\" || true); if [ -n \"$MODIFIED\" ]; then echo \"\\n⚠ Modified test files not yet verified:\"; echo \"$MODIFIED\" | sed \"s/^/  /\"; echo \"\\nRun: npx playwright test --project=chromium\"; fi'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}
