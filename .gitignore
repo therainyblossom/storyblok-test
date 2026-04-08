@@ -1,0 +1,16 @@
+node_modules
+*.log*
+.idea
+.nuxt
+.nitro
+.cache
+.output
+dist
+!.histoire/dist
+
+.env
+.env.*
+!.env.example
+*.pem
+/.nuxt/
+/.output/
