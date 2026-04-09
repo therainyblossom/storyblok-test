@@ -47,6 +47,11 @@ export const PAGES = {
     slug: 'contact',
     expectedH1Contains: 'Get in Touch',
   },
+
+  xxl: {
+    slug: 'xxl',
+    expectedH1Contains: 'XXL',
+  },
 } as const
 
 // ---------------------------------------------------------------------------
