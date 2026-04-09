@@ -13,9 +13,9 @@ Pixel-level screenshot comparison across deploys.
 ## Phase 0: Load Context (mandatory)
 
 1. Read `shared/conventions.md`
-2. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-3. Glob `{{FRONTEND_DIR}}/e2e/tests/*-visual.spec.ts`
-4. Glob `{{FRONTEND_DIR}}/e2e/tests/__screenshots__/`
+2. Read `./e2e/fixtures/test-constants.ts`
+3. Glob `./e2e/tests/*-visual.spec.ts`
+4. Glob `./e2e/tests/__screenshots__/`
 
 ## How It Works
 

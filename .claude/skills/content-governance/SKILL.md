@@ -16,14 +16,14 @@ Find content quality issues that aren't bugs but degrade the user experience. Th
 1. Read [references/content-rules.md](references/content-rules.md)
 2. Read [references/code-examples.md](references/code-examples.md)
 3. Read `shared/conventions.md`
-4. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
+4. Read `./e2e/fixtures/test-constants.ts`
 
 Do NOT start the audit before all files are loaded.
 
 ## Environment
 
-- **Staging**: `{{STAGING_URL}}`
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/tests/`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
+- **Test dir**: `./e2e/tests/`
 
 ## Audit Phases
 

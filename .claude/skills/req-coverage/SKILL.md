@@ -13,8 +13,8 @@ Find gaps: requirements without tests, tests without requirements, components wi
 ## Process
 
 ### 1. Inventory
-- Components: `ls {{COMPONENT_DIR}}`
-- Tests: `ls {{FRONTEND_DIR}}/e2e/tests/*.spec.ts`
+- Components: `ls storyblok`
+- Tests: `ls ./e2e/tests/*.spec.ts`
 - Requirements: scan for spec files, acceptance criteria in tests
 
 ### 2. Build Matrix
@@ -61,8 +61,8 @@ Find gaps: requirements without tests, tests without requirements, components wi
 ## Quick Snapshot
 
 ```bash
-cd {{FRONTEND_DIR}}
-echo "Components: $(ls {{COMPONENT_DIR}}/*.vue 2>/dev/null | wc -l)"
+cd .
+echo "Components: $(ls storyblok/*.vue 2>/dev/null | wc -l)"
 echo "Test files: $(ls e2e/tests/*.spec.ts 2>/dev/null | wc -l)"
 echo "Tests: $(npx playwright test --list --project=chromium 2>&1 | grep -c 'test')"
 ```

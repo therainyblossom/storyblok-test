@@ -35,7 +35,7 @@ await page.getByLabel('Enter your password').fill(password)
 await page.getByRole('button', { name: 'Next' }).click()
 
 // Wait for redirect back to app
-await page.waitForURL('{{STAGING_URL}}/**')
+await page.waitForURL('https://therainyblossom.github.io/storyblok-test//**')
 await page.context().storageState({ path: profilePath })
 ```
 
@@ -49,11 +49,11 @@ await page.context().storageState({ path: profilePath })
 
 ```typescript
 // Direct realm login (skips provider selection)
-await page.goto('{{KEYCLOAK_URL}}/realms/{{REALM}}/protocol/openid-connect/auth?client_id={{CLIENT_ID}}&redirect_uri={{STAGING_URL}}/callback&response_type=code&scope=openid')
+await page.goto('/realms//protocol/openid-connect/auth?client_id=&redirect_uri=https://therainyblossom.github.io/storyblok-test//callback&response_type=code&scope=openid')
 await page.getByLabel('Username or email').fill(email)
 await page.getByLabel('Password').fill(password)
 await page.getByRole('button', { name: 'Sign In' }).click()
-await page.waitForURL('{{STAGING_URL}}/**')
+await page.waitForURL('https://therainyblossom.github.io/storyblok-test//**')
 await page.context().storageState({ path: profilePath })
 ```
 
@@ -62,7 +62,7 @@ await page.context().storageState({ path: profilePath })
 Some SPAs store auth tokens in localStorage or sessionStorage instead of cookies.
 
 ```typescript
-await page.goto('{{STAGING_URL}}')
+await page.goto('https://therainyblossom.github.io/storyblok-test/')
 await page.evaluate(({ token, refreshToken }) => {
   localStorage.setItem('auth_token', token)
   localStorage.setItem('refresh_token', refreshToken)

@@ -15,16 +15,16 @@ Systematic check of on-page and site-level SEO signals.
 
 1. Read [references/seo-checklist.md](references/seo-checklist.md)
 2. Read `shared/conventions.md`
-3. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-4. Glob `{{FRONTEND_DIR}}/e2e/tests/*-seo.spec.ts`
+3. Read `./e2e/fixtures/test-constants.ts`
+4. Glob `./e2e/tests/*-seo.spec.ts`
 
 Do NOT start the audit before all files are loaded.
 
 ## Environment
 
-- **Staging**: `{{STAGING_URL}}`
-- **Locales**: {{LOCALE_LIST}}
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/tests/`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
+- **Locales**: en, de
+- **Test dir**: `./e2e/tests/`
 
 ## Phase 1: Per-Page Checks
 
@@ -83,8 +83,8 @@ const meta = await page.evaluate(() => {
 
 ### robots.txt
 ```bash
-curl -sI '{{STAGING_URL}}/robots.txt'
-curl -s '{{STAGING_URL}}/robots.txt'
+curl -sI 'https://therainyblossom.github.io/storyblok-test//robots.txt'
+curl -s 'https://therainyblossom.github.io/storyblok-test//robots.txt'
 ```
 - Should return 200
 - Should not `Disallow: /` (blocks everything)
@@ -92,7 +92,7 @@ curl -s '{{STAGING_URL}}/robots.txt'
 
 ### sitemap.xml
 ```bash
-curl -s '{{STAGING_URL}}/sitemap.xml' | head -50
+curl -s 'https://therainyblossom.github.io/storyblok-test//sitemap.xml' | head -50
 ```
 - Should return 200 with valid XML
 - Should contain tested page URLs

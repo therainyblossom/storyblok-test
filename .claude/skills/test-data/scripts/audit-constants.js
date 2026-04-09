@@ -10,10 +10,10 @@
 const { chromium } = require(require.resolve('@playwright/test', { paths: [process.cwd()] }))
 
 // ===== CUSTOMIZE THESE =====
-const STAGING = process.env.PLAYWRIGHT_BASE_URL || '{{STAGING_URL}}'
+const STAGING = process.env.PLAYWRIGHT_BASE_URL || 'https://therainyblossom.github.io/storyblok-test/'
 const AUTH = {
-  username: process.env.PLAYWRIGHT_BASIC_AUTH_USER || '{{AUTH_USER}}',
-  password: process.env.PLAYWRIGHT_BASIC_AUTH_PASS || '{{AUTH_PASS}}',
+  username: process.env.PLAYWRIGHT_BASIC_AUTH_USER || '',
+  password: process.env.PLAYWRIGHT_BASIC_AUTH_PASS || '',
 }
 
 // Define checks: each is a { name, check(page) => boolean } pair
@@ -21,7 +21,7 @@ const CHECKS = [
   {
     name: 'Main page loads',
     check: async (page) => {
-      const res = await page.goto(`${STAGING}/{{DEFAULT_LOCALE}}/your-page`, { waitUntil: 'networkidle' })
+      const res = await page.goto(`${STAGING}/en/your-page`, { waitUntil: 'networkidle' })
       return res.status() === 200
     },
   },

@@ -16,8 +16,8 @@ Run after every deploy. If smoke fails, don't run the full suite — fix the dep
 
 1. Read [references/smoke-template.md](references/smoke-template.md)
 2. Read `shared/conventions.md`
-3. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-4. Read `{{FRONTEND_DIR}}/e2e/tests/smoke.spec.ts` (if it exists)
+3. Read `./e2e/fixtures/test-constants.ts`
+4. Read `./e2e/tests/smoke.spec.ts` (if it exists)
 
 ## Commands
 
@@ -26,7 +26,7 @@ Create or update `e2e/tests/smoke.spec.ts` using the template from `references/s
 
 ### `/smoke-test run`
 ```bash
-cd {{FRONTEND_DIR}} && npx playwright test e2e/tests/smoke.spec.ts --project=chromium --retries=0
+cd . && npx playwright test e2e/tests/smoke.spec.ts --project=chromium --retries=0
 ```
 
 ### `/smoke-test --update`

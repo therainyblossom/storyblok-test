@@ -36,7 +36,7 @@ Deletes all CMS stories tagged `e2e-test-fixture`.
 Validates all constants against staging. Run when tests fail for no obvious reason.
 
 ```bash
-cd {{FRONTEND_DIR}} && node path/to/audit-constants.js
+cd . && node path/to/audit-constants.js
 ```
 
 ## When to Use Which Layer

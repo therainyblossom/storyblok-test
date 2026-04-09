@@ -15,15 +15,15 @@ Structured, multi-pass QA audit. Catches bugs a developer would miss.
 1. Read [references/known-patterns.md](references/known-patterns.md)
 2. Read `shared/risk-patterns.md`
 3. Read `shared/conventions.md`
-4. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-5. Glob `{{FRONTEND_DIR}}/e2e/tests/*.spec.ts`
+4. Read `./e2e/fixtures/test-constants.ts`
+5. Glob `./e2e/tests/*.spec.ts`
 
 Do NOT start the audit before all files are loaded.
 
 ## Environment
 
-- **Staging**: `{{STAGING_URL}}`
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/tests/`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
+- **Test dir**: `./e2e/tests/`
 
 ## Audit Process
 

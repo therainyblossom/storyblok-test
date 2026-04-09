@@ -23,8 +23,8 @@ Compare current state against the baseline. Run immediately after every deploy.
 ## Phase 0: Load Context (mandatory)
 
 1. Read [references/diff-scripts.md](references/diff-scripts.md)
-2. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-3. Read `{{FRONTEND_DIR}}/e2e/test-results/deploy-baseline.json` (if it exists)
+2. Read `./e2e/fixtures/test-constants.ts`
+3. Read `./e2e/test-results/deploy-baseline.json` (if it exists)
 
 ## Phase 1: Capture Baseline
 Use the baseline capture script from `references/diff-scripts.md`. Visits each key page from test constants and records: title, h1, body length, link/image/component counts, nav items, console errors. Saves to `e2e/test-results/deploy-baseline.json`.

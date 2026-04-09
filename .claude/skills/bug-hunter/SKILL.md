@@ -15,8 +15,8 @@ Read the code, find the assumptions, then break them.
 1. Read [references/attack-patterns.md](references/attack-patterns.md)
 2. Read `qa-audit/references/known-patterns.md`
 3. Read `shared/risk-patterns.md`
-4. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-5. Glob `{{FRONTEND_DIR}}/e2e/tests/*-bugs.spec.ts`
+4. Read `./e2e/fixtures/test-constants.ts`
+5. Glob `./e2e/tests/*-bugs.spec.ts`
 
 Do NOT write any probe or test before all files are loaded.
 
@@ -55,11 +55,11 @@ const { chromium } = require(require.resolve('@playwright/test', { paths: [proce
   const browser = await chromium.launch()
   const ctx = await browser.newContext({
     ignoreHTTPSErrors: true,
-    httpCredentials: { username: '{{AUTH_USER}}', password: '{{AUTH_PASS}}' },
+    httpCredentials: { username: '', password: '' },
   })
   const page = await ctx.newPage()
   // HYPOTHESIS: ...
-  await page.goto('{{STAGING_URL}}/path', { waitUntil: 'networkidle' })
+  await page.goto('https://therainyblossom.github.io/storyblok-test//path', { waitUntil: 'networkidle' })
   // PROOF: ...
   console.log('Result:', /* observed behavior */)
   await browser.close()

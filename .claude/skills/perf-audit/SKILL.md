@@ -15,15 +15,15 @@ Measure page performance and compare against budgets.
 
 1. Read [references/perf-budgets.md](references/perf-budgets.md)
 2. Read `shared/conventions.md`
-3. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-4. Glob `{{FRONTEND_DIR}}/e2e/tests/*-perf.spec.ts`
+3. Read `./e2e/fixtures/test-constants.ts`
+4. Glob `./e2e/tests/*-perf.spec.ts`
 
 Do NOT start the audit before all files are loaded.
 
 ## Environment
 
-- **Staging**: `{{STAGING_URL}}`
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/tests/`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
+- **Test dir**: `./e2e/tests/`
 
 ## Phase 1: Core Web Vitals
 
