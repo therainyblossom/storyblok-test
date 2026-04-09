@@ -14,21 +14,21 @@ Check HTTP security headers and transport security against OWASP best practices.
 ## Phase 0: Load Context (mandatory)
 
 1. Read [references/header-checklist.md](references/header-checklist.md)
-2. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
+2. Read `./e2e/fixtures/test-constants.ts`
 
 Do NOT start the audit before all files are loaded.
 
 ## Environment
 
-- **Staging**: `{{STAGING_URL}}`
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/tests/`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
+- **Test dir**: `./e2e/tests/`
 
 ## Phase 1: Response Headers
 
 Fetch headers for each page and validate:
 
 ```bash
-curl -sI '{{STAGING_URL}}/path'
+curl -sI 'https://therainyblossom.github.io/storyblok-test//path'
 ```
 
 ### Required Headers
@@ -54,7 +54,7 @@ curl -sI '{{STAGING_URL}}/path'
 
 ```bash
 # Should redirect to HTTPS (301)
-curl -sI -o /dev/null -w '%{http_code} %{redirect_url}' 'http://{{STAGING_URL}}/path'
+curl -sI -o /dev/null -w '%{http_code} %{redirect_url}' 'http://https://therainyblossom.github.io/storyblok-test//path'
 ```
 
 - HTTP request should 301 redirect to HTTPS equivalent

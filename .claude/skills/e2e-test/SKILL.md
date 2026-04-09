@@ -17,10 +17,10 @@ Before any analysis or writing, read these files:
 1. **Conventions**: Read [shared/conventions.md](../shared/conventions.md)
 2. **Risk patterns**: Read [shared/risk-patterns.md](../shared/risk-patterns.md)
 3. **Inferred requirements**: Read [references/inferred-requirements.md](references/inferred-requirements.md)
-4. **Test constants**: Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-5. **Existing tests**: Glob `{{FRONTEND_DIR}}/e2e/tests/*.spec.ts`
-6. **Existing page objects**: Glob `{{FRONTEND_DIR}}/e2e/pages/*.ts`
-7. **Helpers**: Glob `{{FRONTEND_DIR}}/e2e/helpers/*.ts`
+4. **Test constants**: Read `./e2e/fixtures/test-constants.ts`
+5. **Existing tests**: Glob `./e2e/tests/*.spec.ts`
+6. **Existing page objects**: Glob `./e2e/pages/*.ts`
+7. **Helpers**: Glob `./e2e/helpers/*.ts`
 
 Do NOT skip this. Do NOT write a single line of test code before all 7 are loaded.
 
@@ -40,8 +40,8 @@ For every component involved, read:
 
 | What | Where | Why |
 |------|-------|-----|
-| Component | `{{COMPONENT_DIR}}` | What renders, what's interactive |
-| Schema/types | `{{SCHEMA_DIR}}` | Field definitions, validation |
+| Component | `storyblok` | What renders, what's interactive |
+| Schema/types | `storyblok` | Field definitions, validation |
 | Business logic | `composables/` | State, API calls, computed values |
 | Parent/page | `pages/` | How component is mounted |
 
@@ -85,7 +85,7 @@ Present to the user for confirmation.
 ## Phase 4: Verify
 
 ```bash
-cd {{FRONTEND_DIR}}
+cd .
 npx playwright test e2e/tests/{feature}.spec.ts --project=chromium
 ```
 
@@ -93,7 +93,7 @@ Classify each failure: test bug (fix) or real bug (keep failing test, document).
 
 ## Environment
 
-- **Staging**: `{{STAGING_URL}}`
-- **Locales**: {{LOCALE_LIST}}
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/tests/`
-- **Config**: `{{FRONTEND_DIR}}/playwright.config.ts`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
+- **Locales**: en, de
+- **Test dir**: `./e2e/tests/`
+- **Config**: `./playwright.config.ts`

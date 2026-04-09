@@ -13,7 +13,7 @@ Combines automated axe-core scans with manual Playwright-driven checks.
 ## Prerequisites
 
 ```bash
-cd {{FRONTEND_DIR}} && npm install -D @axe-core/playwright
+cd . && npm install -D @axe-core/playwright
 ```
 
 ## Available Helpers

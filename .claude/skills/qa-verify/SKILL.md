@@ -16,7 +16,7 @@ Reproduce findings from other skills. Dismiss false positives. Produce a verifie
 
 1. Read [references/false-positive-patterns.md](references/false-positive-patterns.md)
 2. Read the source report (the file or output from the skill that found the bugs)
-3. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
+3. Read `./e2e/fixtures/test-constants.ts`
 4. Read `shared/conventions.md`
 
 Do NOT verify any finding before all files are loaded.
@@ -44,13 +44,13 @@ const { chromium } = require(require.resolve('@playwright/test', { paths: [proce
   const browser = await chromium.launch()
   const ctx = await browser.newContext({
     ignoreHTTPSErrors: true,
-    httpCredentials: { username: '{{AUTH_USER}}', password: '{{AUTH_PASS}}' },
+    httpCredentials: { username: '', password: '' },
   })
   const page = await ctx.newPage()
 
   // FINDING: {id} — {description}
   // SOURCE: {skill} report
-  await page.goto('{{STAGING_URL}}/path', { waitUntil: 'networkidle' })
+  await page.goto('https://therainyblossom.github.io/storyblok-test//path', { waitUntil: 'networkidle' })
 
   // REPRODUCE:
   // {steps from the finding}
@@ -106,7 +106,7 @@ For findings that may be environment-specific:
 
 ```bash
 # Compare staging vs production headers
-curl -sI '{{STAGING_URL}}/path' > /tmp/staging-headers.txt
+curl -sI 'https://therainyblossom.github.io/storyblok-test//path' > /tmp/staging-headers.txt
 curl -sI 'https://production-url.com/path' > /tmp/prod-headers.txt
 diff /tmp/staging-headers.txt /tmp/prod-headers.txt
 ```

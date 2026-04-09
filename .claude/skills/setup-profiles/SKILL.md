@@ -26,9 +26,9 @@ Playwright's `storageState` captures cookies, localStorage, and sessionStorage a
 ## Phase 0: Load Context (mandatory)
 
 1. Read [references/auth-patterns.md](references/auth-patterns.md)
-2. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-3. Read `{{FRONTEND_DIR}}/.playwright/profiles.json` (if it exists)
-4. Glob `{{FRONTEND_DIR}}/.playwright/profiles/*.json`
+2. Read `./e2e/fixtures/test-constants.ts`
+3. Read `./.playwright/profiles.json` (if it exists)
+4. Glob `./.playwright/profiles/*.json`
 
 ## Commands
 
@@ -46,7 +46,7 @@ Interactive login to capture auth state for a role.
 2. Launch Playwright in headed mode to perform the login:
 
 ```bash
-cd {{FRONTEND_DIR}}
+cd .
 npx playwright test --project=chromium --headed auth-setup.ts
 ```
 
@@ -56,7 +56,7 @@ npx playwright test --project=chromium --headed auth-setup.ts
 import { test as setup } from '@playwright/test'
 
 setup('authenticate as {role}', async ({ page }) => {
-  await page.goto('{{STAGING_URL}}/login')
+  await page.goto('https://therainyblossom.github.io/storyblok-test//login')
 
   // Form-based login
   await page.getByLabel('Email').fill(process.env.AUTH_{ROLE}_EMAIL ?? '{email}')
@@ -221,7 +221,7 @@ await page.waitForURL('**/dashboard**')
 
 ### Token-based (API key in localStorage)
 ```typescript
-await page.goto('{{STAGING_URL}}')
+await page.goto('https://therainyblossom.github.io/storyblok-test/')
 await page.evaluate((token) => {
   localStorage.setItem('auth_token', token)
 }, process.env.AUTH_TOKEN)
@@ -236,7 +236,7 @@ In CI, profiles are created from environment variables at the start of the pipel
 e2e-tests:
   stage: test
   script:
-    - cd {{FRONTEND_DIR}}
+    - cd .
     - npm ci
     - npx playwright install chromium --with-deps
     # Create auth profiles from CI secrets

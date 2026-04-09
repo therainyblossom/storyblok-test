@@ -13,7 +13,7 @@ Verify the test environment is healthy before running the suite. Takes ~10 secon
 ## Phase 0: Load Context (mandatory)
 
 1. Read [references/preflight-checks.md](references/preflight-checks.md)
-2. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
+2. Read `./e2e/fixtures/test-constants.ts`
 
 ## Phase 1: Connectivity
 
@@ -21,7 +21,7 @@ Check that the staging URL responds:
 
 ```bash
 # Should return 200 (or 401 if behind basic auth)
-STATUS=$(curl -sI -o /dev/null -w '%{http_code}' --max-time 10 '{{STAGING_URL}}/')
+STATUS=$(curl -sI -o /dev/null -w '%{http_code}' --max-time 10 'https://therainyblossom.github.io/storyblok-test//')
 echo "Status: $STATUS"
 ```
 
@@ -39,7 +39,7 @@ If staging has basic auth, verify credentials work:
 
 ```bash
 STATUS=$(curl -sI -o /dev/null -w '%{http_code}' --max-time 10 \
-  -u '{{AUTH_USER}}:{{AUTH_PASS}}' '{{STAGING_URL}}/')
+  -u ':' 'https://therainyblossom.github.io/storyblok-test//')
 echo "Auth status: $STATUS"
 ```
 
@@ -59,14 +59,14 @@ const { chromium } = require(require.resolve('@playwright/test', { paths: [proce
   const browser = await chromium.launch()
   const ctx = await browser.newContext({
     ignoreHTTPSErrors: true,
-    httpCredentials: { username: '{{AUTH_USER}}', password: '{{AUTH_PASS}}' },
+    httpCredentials: { username: '', password: '' },
   })
   const page = await ctx.newPage()
 
   const errors: string[] = []
   page.on('pageerror', (err) => errors.push(err.message))
 
-  await page.goto('{{STAGING_URL}}/', { waitUntil: 'networkidle', timeout: 30000 })
+  await page.goto('https://therainyblossom.github.io/storyblok-test//', { waitUntil: 'networkidle', timeout: 30000 })
 
   // Page should have content
   const bodyText = await page.locator('body').innerText()
@@ -104,7 +104,7 @@ page.on('response', (res) => {
   }
 })
 
-await page.goto('{{STAGING_URL}}/', { waitUntil: 'networkidle' })
+await page.goto('https://therainyblossom.github.io/storyblok-test//', { waitUntil: 'networkidle' })
 
 const failed = criticalResources.filter(r => !r.loaded)
 console.log('Resources:', criticalResources.length, 'loaded,', failed.length, 'failed')
@@ -123,7 +123,7 @@ Verify the cookie banner appears and can be dismissed (many tests depend on this
 ```typescript
 import { dismissCookieConsent } from '../helpers/cookie-consent'
 
-await page.goto('{{STAGING_URL}}/', { waitUntil: 'networkidle' })
+await page.goto('https://therainyblossom.github.io/storyblok-test//', { waitUntil: 'networkidle' })
 await dismissCookieConsent(page)
 // If this doesn't throw, consent handling works
 console.log('Cookie consent: PASS')

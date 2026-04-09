@@ -14,15 +14,15 @@ Find broken links before users do.
 ## Phase 0: Load Context (mandatory)
 
 1. Read `shared/conventions.md`
-2. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-3. Glob `{{FRONTEND_DIR}}/e2e/tests/*-links.spec.ts`
+2. Read `./e2e/fixtures/test-constants.ts`
+3. Glob `./e2e/tests/*-links.spec.ts`
 
 Do NOT start the check before all files are loaded.
 
 ## Environment
 
-- **Staging**: `{{STAGING_URL}}`
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/tests/`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
+- **Test dir**: `./e2e/tests/`
 
 ## Phase 1: Collect Links
 
@@ -67,7 +67,7 @@ const links = await page.evaluate(() => {
 
 ### Internal Links
 ```bash
-curl -sI -o /dev/null -w '%{http_code}' '{{STAGING_URL}}/path'
+curl -sI -o /dev/null -w '%{http_code}' 'https://therainyblossom.github.io/storyblok-test//path'
 ```
 - **200**: Pass
 - **301/302**: Warning — note redirect target, flag chains > 2 hops

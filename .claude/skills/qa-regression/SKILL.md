@@ -14,14 +14,14 @@ Run, analyze, and maintain the Playwright regression suite.
 
 1. Read [references/flaky-patterns.md](references/flaky-patterns.md)
 2. Read `shared/conventions.md`
-3. Read `{{FRONTEND_DIR}}/e2e/fixtures/test-constants.ts`
-4. Glob `{{FRONTEND_DIR}}/e2e/tests/*.spec.ts`
+3. Read `./e2e/fixtures/test-constants.ts`
+4. Glob `./e2e/tests/*.spec.ts`
 
 ## Workflow
 
 ### 1. Run the Suite
 ```bash
-cd {{FRONTEND_DIR}}
+cd .
 npx playwright test --project=chromium
 ```
 
