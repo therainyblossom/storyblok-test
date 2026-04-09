@@ -1,13 +1,18 @@
 # CLAUDE.md
 
-Copy this file to your project root alongside the skills and Playwright boilerplate.
+## Project
+
+- **Framework**: Nuxt 3 (Vue 3, Composition API) with Storyblok CMS
+- **Deployment**: GitHub Pages (static SPA, ssr: false)
+- **Space ID**: 291713566231447
+- **Storyblok region**: EU
 
 ## Stack
 
 - **Test framework**: Playwright (`@playwright/test`)
 - **Accessibility**: axe-core (`@axe-core/playwright`)
-- **Test dir**: `{{FRONTEND_DIR}}/e2e/`
-- **Staging**: `{{STAGING_URL}}`
+- **Test dir**: `e2e/`
+- **Staging**: `https://therainyblossom.github.io/storyblok-test/`
 
 ## Rules
 
@@ -44,3 +49,16 @@ After audits, always verify findings with `/qa-verify` before filing bugs.
 | `testModalFocusTrap()` | `helpers/accessibility-patterns` | Test modal focus cycling |
 | `testTabNavigation()` | `helpers/accessibility-patterns` | Test tab widget keyboard nav |
 | `testDropdownKeyboard()` | `helpers/accessibility-patterns` | Test dropdown keyboard nav |
+
+## Auto E2E Test Generation (CI)
+
+On every PR, the `auto-test.yml` workflow runs Claude Code to:
+1. Read the PR diff and identify changed components/pages
+2. Generate or update Playwright test files in `e2e/tests/`
+3. Run tests and report results as PR comments
+
+When generating tests in CI:
+- Never modify application code, only test files
+- Use optional chaining (`?.`) for all `blok` field accesses
+- The site is built and served locally (webServer in playwright.config.ts)
+- Content loads from Storyblok CDN at runtime (client-side SPA)
