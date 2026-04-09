@@ -76,7 +76,7 @@ defineProps({
         <StoryblokComponent v-for="button in blok.buttons" :key="button._uid" :blok="button" />
       </div>
       <div class="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
-        <span class="font-semibold text-gray-400 uppercase">{{ blok.featuredInText }}</span>
+        <span class="font-semibold text-gray-600 uppercase">{{ blok.featuredInText }}</span>
         <div
           class="flex flex-wrap justify-center items-center mt-8 text-gray-500 sm:justify-between"
         >
