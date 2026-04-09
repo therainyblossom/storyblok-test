@@ -1,5 +1,40 @@
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c '$CLAUDE_PROJECT_DIR/.claude/hooks/session-env.sh'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c '$CLAUDE_PROJECT_DIR/.claude/hooks/block-dangerous.sh'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c '$CLAUDE_PROJECT_DIR/.claude/hooks/auto-approve-safe.sh'",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
@@ -11,7 +46,7 @@
           },
           {
             "type": "command",
-            "command": "bash -c '.claude/scripts/check-schema-match.sh \"$CLAUDE_TOOL_ARG_FILE_PATH\"'",
+            "command": "bash -c '$CLAUDE_PROJECT_DIR/.claude/scripts/check-schema-match.sh \"$CLAUDE_TOOL_ARG_FILE_PATH\"'",
             "timeout": 10000
           },
           {
