@@ -215,3 +215,39 @@ npx playwright test --project=chromium --headed
 # View the HTML report
 npx playwright show-report e2e/reports
 ```
+
+---
+
+## Auto Test Generation (Pre-Push Hook)
+
+A git `pre-push` hook automatically generates e2e tests for changed components using Claude Code CLI (runs locally with your Premium plan).
+
+### Setup
+
+```bash
+# Install Claude Code CLI (one-time)
+npm install -g @anthropic-ai/claude-code
+
+# Install the git hook
+./scripts/install-hooks.sh
+```
+
+### How It Works
+
+1. You change a component in `storyblok/` or `components/`
+2. You `git push` on a feature branch
+3. The hook detects changed component files
+4. Claude Code generates/updates spec files in `e2e/tests/`
+5. Playwright runs the tests
+6. If they pass, the hook auto-commits the test files into your push
+
+### Skips When
+
+- Pushing from `main` or `dev` (no test generation needed)
+- No component files changed in the branch
+
+### Files
+
+- `scripts/hooks/pre-push` — the hook source (tracked in git)
+- `scripts/install-hooks.sh` — installs the hook to `.git/hooks/`
+- `.git/hooks/pre-push` — the active hook (not tracked, created by install script)

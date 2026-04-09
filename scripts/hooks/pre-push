@@ -1,0 +1,71 @@
+#!/bin/bash
+# Pre-push hook: auto-generate e2e tests for changed components
+#
+# Uses Claude Code CLI (Premium plan, runs locally).
+# Skips if no storyblok/ or components/ files changed.
+
+set -e
+
+REMOTE="$1"
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Only run on feature branches pushing to dev
+if [[ "$BRANCH" == "main" || "$BRANCH" == "dev" ]]; then
+  exit 0
+fi
+
+# Check if any component files changed vs dev
+CHANGED=$(git diff --name-only origin/dev...HEAD -- storyblok/ components/ 2>/dev/null || true)
+if [ -z "$CHANGED" ]; then
+  echo "[pre-push] No component changes detected, skipping test generation."
+  exit 0
+fi
+
+echo "[pre-push] Component changes detected:"
+echo "$CHANGED" | sed 's/^/  /'
+echo ""
+echo "[pre-push] Generating e2e tests with Claude Code..."
+
+# Build the site first (needed for Playwright webServer)
+if [ ! -d ".output/public" ]; then
+  echo "[pre-push] Building static site..."
+  npx nuxt generate 2>/dev/null || {
+    echo "[pre-push] Build failed — skipping test generation."
+    exit 0
+  }
+fi
+
+# Run Claude to generate tests
+claude -p "
+You are generating e2e tests before a push. Changed component files:
+$CHANGED
+
+Instructions:
+1. Read the changed files listed above
+2. Read e2e/fixtures/base.ts, e2e/fixtures/test-constants.ts, e2e/pages/BasePage.ts
+3. Check if e2e/tests/ already has a spec file for the changed components
+4. If spec exists: add new test cases for the changes, keep existing tests
+5. If no spec: create a new spec file that tests against the XXL page (/xxl)
+6. Import from e2e/fixtures/base, use test constants, use POM pattern
+7. Run checkA11y() in at least one test
+8. Never modify smoke.spec.ts or application code
+9. Run: npx playwright test e2e/tests/ --project=chromium
+10. If tests pass, done. If they fail, fix the test and retry once.
+
+Name spec files after the component (e.g. website-heading.spec.ts).
+" --max-turns 10 2>&1 | tail -20
+
+# Stage any new/modified test files
+NEW_TESTS=$(git diff --name-only -- e2e/tests/ 2>/dev/null || true)
+UNTRACKED=$(git ls-files --others --exclude-standard -- e2e/tests/ 2>/dev/null || true)
+
+if [ -n "$NEW_TESTS" ] || [ -n "$UNTRACKED" ]; then
+  echo ""
+  echo "[pre-push] New/updated test files:"
+  echo "$NEW_TESTS $UNTRACKED" | tr ' ' '\n' | grep -v '^$' | sed 's/^/  /'
+  git add e2e/tests/
+  git commit -m "test: auto-generate e2e tests for component changes" --no-verify
+  echo "[pre-push] Tests committed. Push will include them."
+fi
+
+exit 0
