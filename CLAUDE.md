@@ -50,15 +50,17 @@ After audits, always verify findings with `/qa-verify` before filing bugs.
 | `testTabNavigation()` | `helpers/accessibility-patterns` | Test tab widget keyboard nav |
 | `testDropdownKeyboard()` | `helpers/accessibility-patterns` | Test dropdown keyboard nav |
 
-## Auto E2E Test Generation (CI)
+## E2E Test Generation via @claude
 
-On every PR, the `auto-test.yml` workflow runs Claude Code to:
-1. Read the PR diff and identify changed components/pages
-2. Generate or update Playwright test files in `e2e/tests/`
-3. Run tests and report results as PR comments
+Comment `@claude` on any PR to ask Claude to generate tests. Example:
 
-When generating tests in CI:
+> @claude generate e2e tests for the components changed in this PR
+
+Claude will read the diff, use the e2e-test skill, and suggest test code.
+
+When generating tests:
 - Never modify application code, only test files
+- Never modify smoke.spec.ts — that's the permanent baseline
 - Use optional chaining (`?.`) for all `blok` field accesses
-- The site is built and served locally (webServer in playwright.config.ts)
-- Content loads from Storyblok CDN at runtime (client-side SPA)
+- Import from `e2e/fixtures/base`, not `@playwright/test`
+- Use test constants from `e2e/fixtures/test-constants.ts`
