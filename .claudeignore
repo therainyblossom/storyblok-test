@@ -4,3 +4,9 @@ __screenshots__/
 reports/
 dist/
 *.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
