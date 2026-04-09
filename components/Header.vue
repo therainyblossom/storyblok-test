@@ -33,7 +33,7 @@ onMounted(() => {
   <nav
     id="default-header"
     :class="{ 'md:block': true, hidden: isMobileMenuOpen }"
-    class="bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-900"
+    class="sticky top-0 z-40 bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-900"
   >
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
       <NuxtLink :to="'/home'" class="flex items-center z-[60]" aria-label="Home">
