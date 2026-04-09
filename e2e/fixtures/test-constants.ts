@@ -22,11 +22,30 @@ export const LOCALES = {
 // ---------------------------------------------------------------------------
 
 export const PAGES = {
-  /** Homepage — Storyblok home story */
   home: {
     slug: '',
     slugSecondary: `${LOCALES.secondary}`,
     expectedH1Contains: 'Education',
+  },
+
+  about: {
+    slug: 'about',
+    expectedH1Contains: 'About',
+  },
+
+  services: {
+    slug: 'services',
+    expectedH1Contains: 'Services',
+  },
+
+  blog: {
+    slug: 'blog',
+    expectedH1Contains: 'Blog',
+  },
+
+  contact: {
+    slug: 'contact',
+    expectedH1Contains: 'Get in Touch',
   },
 } as const
 
@@ -35,7 +54,6 @@ export const PAGES = {
 // ---------------------------------------------------------------------------
 
 export const NAV = {
-  /** Header nav is dynamic from Storyblok — check presence, not exact labels */
   headerSelector: '#default-header',
   mobileMenuSelector: '.md\\:hidden.fixed',
 } as const
