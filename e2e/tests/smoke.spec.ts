@@ -11,7 +11,15 @@ test.describe('Smoke', () => {
     await page.waitForLoadState('networkidle')
     await expect(page.locator('.flex.flex-col.min-h-screen')).toBeVisible({ timeout: 15000 })
 
-    await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
+    // At least one h1 must exist
+    const h1s = page.getByRole('heading', { level: 1 })
+    await expect(h1s.first()).toBeVisible()
+    // Multiple h1s is a content issue — flag it
+    const h1Count = await h1s.count()
+    if (h1Count > 1) {
+      console.warn(`WARNING: Page has ${h1Count} h1 elements — should have exactly 1`)
+    }
+
     await expect(basePage.header).toBeVisible()
     await expect(basePage.footer).toBeVisible()
 
@@ -26,7 +34,6 @@ test.describe('Smoke', () => {
     await page.waitForLoadState('networkidle')
     await expect(page.locator('.flex.flex-col.min-h-screen')).toBeVisible({ timeout: 15000 })
 
-    // Find the first nav link and click it
     const navLink = page.locator('#default-header nav a').first()
     if (await navLink.isVisible({ timeout: 3000 }).catch(() => false)) {
       await navLink.click()
