@@ -6,13 +6,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_FILE_PATH\"; if [[ \"$FILE\" == *.spec.ts ]]; then echo \"[hook] Test file modified: $FILE — remember to run it\"; fi'",
-            "timeout": 5000
+            "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_FILE_PATH\"; if [[ \"$FILE\" == *.spec.ts ]]; then echo \"[hook] Running test: $FILE\"; npx playwright test \"$FILE\" --project=chromium --reporter=list 2>&1 | tail -5; fi'",
+            "timeout": 60000
           },
           {
             "type": "command",
             "command": "bash -c '.claude/scripts/check-schema-match.sh \"$CLAUDE_TOOL_ARG_FILE_PATH\"'",
             "timeout": 10000
+          },
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_FILE_PATH\"; if [[ \"$FILE\" == *.vue ]] || [[ \"$FILE\" == *.ts ]] || [[ \"$FILE\" == *.js ]]; then npx eslint \"$FILE\" --fix --no-warn-ignored 2>&1 | grep -v \"^$\" | tail -5 || true; fi'",
+            "timeout": 15000
           },
           {
             "type": "command",
