@@ -11,7 +11,7 @@ test.describe('Smoke', () => {
     await page.waitForLoadState('networkidle')
     await expect(page.locator('.flex.flex-col.min-h-screen')).toBeVisible({ timeout: 15000 })
 
-    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
     await expect(basePage.header).toBeVisible()
     await expect(basePage.footer).toBeVisible()
 
@@ -31,7 +31,7 @@ test.describe('Smoke', () => {
     if (await navLink.isVisible({ timeout: 3000 }).catch(() => false)) {
       await navLink.click()
       await page.waitForLoadState('networkidle')
-      await expect(page.getByRole('heading', { level: 1 })).toBeVisible({ timeout: 10000 })
+      await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible({ timeout: 10000 })
     }
   })
 
@@ -40,7 +40,7 @@ test.describe('Smoke', () => {
     await goToPage(PAGES.about.slug)
     await page.waitForLoadState('networkidle')
     await expect(page.locator('.flex.flex-col.min-h-screen')).toBeVisible({ timeout: 15000 })
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText(
       PAGES.about.expectedH1Contains,
     )
     await checkA11y({ filterContrast: true })
@@ -51,7 +51,7 @@ test.describe('Smoke', () => {
     await goToPage(PAGES.services.slug)
     await page.waitForLoadState('networkidle')
     await expect(page.locator('.flex.flex-col.min-h-screen')).toBeVisible({ timeout: 15000 })
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+    await expect(page.getByRole('heading', { level: 1 }).first()).toContainText(
       PAGES.services.expectedH1Contains,
     )
     await checkA11y({ filterContrast: true })
